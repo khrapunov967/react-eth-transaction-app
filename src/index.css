@@ -7,5 +7,17 @@
   margin: 0;
   box-sizing: border-box;
   outline: none;
+  font-family: 'Lato', sans-serif;
+  color: #060606;
+}
+
+body {
+  background: #f9f9f9;
+}
+
+.wrapper {
+  max-width: 1440px;
+  height: 100vh;
+  margin: 0 auto;
 }
 
