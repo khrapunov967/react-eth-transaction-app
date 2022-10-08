@@ -14,7 +14,10 @@ function App() {
 
   return (
     <div className="wrapper">
-      {!!userAddress ? <MainPage userAddress={userAddress}/> : <LoginPage connectMetamaskWallet={connectMetamaskWallet} />}
+      {
+        (!!userAddress) ? <MainPage userAddress={userAddress}/> : 
+        <LoginPage connectMetamaskWallet={connectMetamaskWallet} />
+      }
     </div>
   );
 }
