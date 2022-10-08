@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileCard = ({userAddress}) => {
+const ProfileCard = ({userAddress, userBalance}) => {
     return (
         <div className="flex border-solid border-2 p-2 gap-5 mb-5">
             <div className="w-20 h-20">
@@ -11,6 +11,11 @@ const ProfileCard = ({userAddress}) => {
                 <div className="flex gap-2">
                     <p>Your Address:</p>
                     <p>{userAddress}</p>
+                </div>
+
+                <div className="flex gap-2">
+                    <p>Your balance:</p>
+                    <p>{userBalance}</p>
                 </div>
             </div>
         </div>
