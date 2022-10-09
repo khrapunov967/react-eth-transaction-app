@@ -13,9 +13,9 @@ const ProfileCard = ({userAddress, userBalance}) => {
                     <p>{userAddress}</p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className={`flex gap-2`}>
                     <p>Your balance:</p>
-                    <p>{userBalance}</p>
+                    <p className="text-green-400">{userBalance}</p>
                 </div>
             </div>
         </div>

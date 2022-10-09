@@ -6,7 +6,7 @@ const MainPage = ({userAddress, userBalance}) => {
     return (
         <section className="w-full flex flex-col items-center pt-7">
             <ProfileCard userAddress={userAddress} userBalance={userBalance}/>
-            <TransactionForm />
+            <TransactionForm userBalance={userBalance}/>
         </section>
     );
 };
