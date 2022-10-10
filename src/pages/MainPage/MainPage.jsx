@@ -4,7 +4,7 @@ import TransactionForm from "../../components/TransactionForm/TransactionForm";
 
 const MainPage = ({userAddress, userBalance}) => {
     return (
-        <section className="w-full flex flex-col items-center pt-7">
+        <section className="w-fullflex flex-col items-center pt-10">
             <ProfileCard userAddress={userAddress} userBalance={userBalance}/>
             <TransactionForm userBalance={userBalance}/>
         </section>

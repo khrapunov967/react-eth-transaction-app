@@ -1,6 +1,5 @@
 import React from "react";
 import Title from "../../components/Title/Title";
-import { Oval } from "react-loader-spinner";
 import MyButton from "../../components/UI/MyButton/MyButton";
 import Loader from "../../components/UI/Loader/Loader";
 

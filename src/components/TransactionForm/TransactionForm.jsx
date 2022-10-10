@@ -10,9 +10,17 @@ const TransactionForm = ({userBalance}) => {
     return (
         <div className="flex flex-col items-center gap-2 w-full border-solid border-2 p-2 rounded-lg">
             <Title className={"text-2xl font-bold mb-4"} titleName={"Send ETH"}/>
+            
             <MyInput 
                 placeholder={"Address"} 
-                className={"outline-none border-solid border-2 border-stone-200 rounded-md w-full text-lg p-2"}
+                className={`
+                    outline-none 
+                    border-solid border-2 border-stone-200 rounded-md 
+                    w-full 
+                    text-lg 
+                    p-2
+                    focus:shadow-md
+                    duration-150`}
             />
 
             <MyInput 
@@ -28,7 +36,8 @@ const TransactionForm = ({userBalance}) => {
                     w-full 
                     text-lg 
                     p-2
-                    ${(+amount > userBalance) ? "border-red-400" : "border-stone-200"}`
+                    focus:shadow-md
+                    ${(+amount > userBalance) ? "border-red-400 text-red-400" : "border-stone-200"}`
                 }
             />
 
