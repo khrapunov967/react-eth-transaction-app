@@ -7,13 +7,21 @@ function App() {
 
   const [userAddress, setUserAddress] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const connectMetamaskWallet = async (e) => {
     e.preventDefault();
-    const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
-    // console.log(accounts);
-    accountChangedHandler(accounts[0]);
+    setIsLoading(true);
+    
+    try {
+      const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
+      accountChangedHandler(accounts[0]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const accountChangedHandler = async (accountAddress) => {
@@ -26,7 +34,9 @@ function App() {
     <div className="wrapper">
       {
         (userAddress) ? <MainPage userAddress={userAddress} userBalance={userBalance}/>
-                      : <LoginPage connectMetamaskWallet={connectMetamaskWallet} />
+                      : <LoginPage 
+                          connectMetamaskWallet={connectMetamaskWallet} 
+                          isLoading={isLoading}/>
       }
     </div>
   );

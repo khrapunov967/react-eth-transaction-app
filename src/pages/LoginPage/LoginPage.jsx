@@ -1,8 +1,10 @@
 import React from "react";
 import Title from "../../components/Title/Title";
+import { Oval } from "react-loader-spinner";
 import MyButton from "../../components/UI/MyButton/MyButton";
+import Loader from "../../components/UI/Loader/Loader";
 
-const LoginPage = ({connectMetamaskWallet}) => {
+const LoginPage = ({connectMetamaskWallet, isLoading}) => {
 
     return (
         <section className="w-full h-full flex flex-col justify-center items-center">
@@ -21,7 +23,7 @@ const LoginPage = ({connectMetamaskWallet}) => {
                     hover:bg-indigo-500 
                     transition ease-in-out`
                 }
-                buttonName={"Login with Metamask"}
+                buttonName={isLoading ? <Loader /> :"Login with Metamask"}
                 onClick={connectMetamaskWallet}
             />
         </section>
