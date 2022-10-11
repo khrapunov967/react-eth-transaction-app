@@ -3,7 +3,7 @@ import Title from "../../components/Title/Title";
 import MyButton from "../../components/UI/MyButton/MyButton";
 import Loader from "../../components/UI/Loader/Loader";
 
-const LoginPage = ({connectMetamaskWallet, isLoading}) => {
+const LoginPage = ({connectWallet, isLoginLoading}) => {
 
     return (
         <section className="w-full h-full flex flex-col justify-center items-center">
@@ -22,8 +22,8 @@ const LoginPage = ({connectMetamaskWallet, isLoading}) => {
                     hover:bg-indigo-500 
                     transition ease-in-out`
                 }
-                buttonName={isLoading ? <Loader /> :"Login with Metamask"}
-                onClick={connectMetamaskWallet}
+                buttonName={isLoginLoading ? <Loader /> :"Login with Metamask"}
+                onClick={connectWallet}
             />
         </section>
     );

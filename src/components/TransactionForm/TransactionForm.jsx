@@ -1,25 +1,56 @@
+import { ethers } from "ethers";
 import React, {useState} from "react";
 import Title from "../Title/Title";
+import Loader from "../UI/Loader/Loader";
 import MyButton from "../UI/MyButton/MyButton";
 import MyInput from "../UI/MyInput/MyInput";
 
-const TransactionForm = ({userBalance}) => {
+const TransactionForm = ({userBalance, transactions, setTransactions}) => {
 
+    const [receiverAddress, setReceiverAddress] = useState("");
     const [amount, setAmount] = useState("");
+    const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+
+    const sendEthPayment = async (receiverAddress, amount) => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+
+        setIsPaymentLoading(true);
+        
+        try {
+            await signer.sendTransaction({
+                to: receiverAddress,
+                value: ethers.utils.parseEther(amount)
+            });
+            setTransactions([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]);
+
+        } catch (error) {
+            console.log(error)
+
+        } finally {
+            setIsPaymentLoading(false);
+        }
+    };
 
     return (
-        <div className="flex flex-col items-center gap-2 w-full border-solid border-2 p-2 rounded-lg">
-            <Title className={"text-2xl font-bold mb-4"} titleName={"Send ETH"}/>
+        <div className="flex flex-col items-center gap-2 w-full border-solid border-2 p-2 rounded-lg mb-5 border-slate-100 shadow-md">
+            <Title 
+                className={"text-2xl font-bold mb-4"} 
+                titleName={"Send ETH payment"}
+            />
             
             <MyInput 
                 placeholder={"Address"} 
+                value={receiverAddress}
+                onChange={(e) => setReceiverAddress(e.target.value)}
                 className={`
                     outline-none 
-                    border-solid border-2 border-stone-200 rounded-md 
+                    shadow-md
+                    border-solid border-2 border-slate-100 rounded-md 
                     w-full 
                     text-lg 
+                    focus:border-slate-200
                     p-2
-                    focus:shadow-md
                     duration-150`}
             />
 
@@ -32,24 +63,26 @@ const TransactionForm = ({userBalance}) => {
                     duration-150
                     ease-linear
                     outline-none 
+                    shadow-md
                     border-solid border-2 rounded-md 
                     w-full 
                     text-lg 
                     p-2
-                    focus:shadow-md
-                    ${(+amount > userBalance) ? "border-red-400 text-red-400" : "border-stone-200"}`
+                    ${(+amount > userBalance) ? "border-red-100 text-red-300" : "border-slate-100 focus:border-slate-200"}`
                 }
             />
 
             <MyButton
                 disabled={(+amount > userBalance) ? true : false} 
-                buttonName={"Send"} 
+                onClick={() => sendEthPayment(receiverAddress, amount)}
+                buttonName={isPaymentLoading ? <Loader /> : "Send ETH"} 
                 className={`
                     text-white 
                     rounded-lg 
                     border-solid border-2
                     px-4 py-2
                     w-full
+                    flex justify-center
                     ${+amount > userBalance ? 
                         "bg-gray-400 border-gray-300 cursor-no-drop opacity-6" : 
                         "bg-indigo-600 border-indigo-400 hover:bg-indigo-500"

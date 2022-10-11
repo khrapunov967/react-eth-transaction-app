@@ -7,12 +7,17 @@ function App() {
 
   const [userAddress, setUserAddress] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [transactions, setTransactions] = useState([
+    {id: 1, receiver: "0x2a1135e669a5f16b46daafb718f6aa4f3818b81aOO", amount: "0.01"},
+    {id: 2, receiver: "0x2a1135e669a5f16b46daafb718f6aa4f3818b81a", amount: "0.2"},
+    {id: 3, receiver: "0x2a1135e669a5f16b46daafb718f6aa4f3818b81a", amount: "0.015"},
+  ]);
 
 
-  const connectMetamaskWallet = async (e) => {
+  const connectWallet = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoginLoading(true);
     
     try {
       const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
@@ -22,7 +27,7 @@ function App() {
       console.log(error);
 
     } finally {
-      setIsLoading(false);
+      setIsLoginLoading(false);
     }
   }
 
@@ -35,8 +40,8 @@ function App() {
   return (
     <div className="wrapper">
       {
-        (userAddress) ? <MainPage userAddress={userAddress} userBalance={userBalance}/> : 
-        <LoginPage connectMetamaskWallet={connectMetamaskWallet} isLoading={isLoading}/>
+        (userAddress) ? <MainPage userAddress={userAddress} userBalance={userBalance} transactions={transactions} setTransactions={setTransactions}/> : 
+        <LoginPage connectWallet={connectWallet} isLoginLoading={isLoginLoading}/>
       }
     </div>
   );
