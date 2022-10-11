@@ -5,7 +5,7 @@ import Loader from "../UI/Loader/Loader";
 import MyButton from "../UI/MyButton/MyButton";
 import MyInput from "../UI/MyInput/MyInput";
 
-const TransactionForm = ({userBalance, transactions, setTransactions}) => {
+const TransactionForm = ({userBalance, transactions, setTransactions, setIsSuccessMsgVisible}) => {
 
     const [receiverAddress, setReceiverAddress] = useState("");
     const [amount, setAmount] = useState("");
@@ -23,6 +23,7 @@ const TransactionForm = ({userBalance, transactions, setTransactions}) => {
                 value: ethers.utils.parseEther(amount)
             });
             setTransactions([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]);
+            setIsSuccessMsgVisible(true);
 
         } catch (error) {
             console.log(error)

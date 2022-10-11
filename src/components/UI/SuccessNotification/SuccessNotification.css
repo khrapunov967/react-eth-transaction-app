@@ -1,0 +1,23 @@
+@keyframes success-msg-show-animation {
+    100% {
+        opacity: 1;
+    }
+}
+
+.success-msg {
+    opacity: 0;
+    animation: success-msg-show-animation 0.5s linear forwards;
+}
+
+svg {
+    opacity: 0.7;
+    transition: all 0.15s linear;
+}
+
+svg path {
+    color: white;
+}
+
+svg:hover {
+    opacity: 1;
+}
