@@ -1,12 +1,12 @@
-@keyframes success-msg-show-animation {
+@keyframes error-msg-show-animation {
     100% {
         opacity: 1;
     }
 }
 
-.success-msg {
+.error-msg {
     opacity: 0;
-    animation: success-msg-show-animation 1s linear forwards;
+    animation: error-msg-show-animation 1s linear forwards;
 }
 
 svg {

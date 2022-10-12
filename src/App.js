@@ -1,18 +1,22 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MainPage from "./pages/MainPage/MainPage";
 
 function App() {
 
-  const [userAddress, setUserAddress] = useState(null);
-  const [userBalance, setUserBalance] = useState(null);
+  const [userAddress, setUserAddress] = useState("");
+  const [userBalance, setUserBalance] = useState("");
+
   const [isLoginLoading, setIsLoginLoading] = useState(false);
-  const [transactions, setTransactions] = useState([
-    {id: 1, receiver: "0x2a1135e669a5f16b46daafb718f6aa4f3818b81aOO", amount: "0.01"},
-    {id: 2, receiver: "0x2a1135e669a5f16b46daafb718f6aa4f3818b81a", amount: "0.2"},
-    {id: 3, receiver: "0x2a1135e669a5f16b46daafb718f6aa4f3818b81a", amount: "0.015"},
-  ]);
+
+  const [transactions, setTransactions] = useState(JSON.parse(localStorage.getItem("transactions")) ?? []);
+
+  useEffect(() => {
+    // ADD UPDATE CURRENT BALANCE FUNCTIONALITY
+    setUserAddress(localStorage.getItem("userAddress") ?? "");
+    setUserBalance(localStorage.getItem("userBalance") ?? "");
+  }, []);
 
 
   const connectWallet = async (e) => {
@@ -31,17 +35,38 @@ function App() {
     }
   }
 
+  const getCurrentBalance = async (address) => {
+    const balance = await window.ethereum.request({method: "eth_getBalance", params: [address, "latest"]});
+    const convertedBalance = ethers.utils.formatEther(balance);
+
+    return convertedBalance;
+  }
+
   const accountChangedHandler = async (accountAddress) => {
     setUserAddress(accountAddress);
-    const balance = await window.ethereum.request({method: "eth_getBalance", params: [accountAddress, "latest"]});
-    setUserBalance(ethers.utils.formatEther(balance));
+    localStorage.setItem("userAddress", accountAddress);
+
+    const balance = await getCurrentBalance(accountAddress);
+
+    setUserBalance(balance);
+    localStorage.setItem("userBalance", balance)
   };
 
   return (
     <div className="wrapper">
-      {
-        (userAddress) ? <MainPage userAddress={userAddress} userBalance={userBalance} transactions={transactions} setTransactions={setTransactions}/> : 
-        <LoginPage connectWallet={connectWallet} isLoginLoading={isLoginLoading}/>
+      {(userAddress) ? 
+        <MainPage 
+          userAddress={userAddress} 
+          userBalance={userBalance} 
+          setUserBalance={setUserBalance}
+          getCurrentBalance={getCurrentBalance}
+          transactions={transactions} 
+          setTransactions={setTransactions}
+        /> : 
+        <LoginPage 
+          connectWallet={connectWallet} 
+          isLoginLoading={isLoginLoading}
+        />
       }
     </div>
   );

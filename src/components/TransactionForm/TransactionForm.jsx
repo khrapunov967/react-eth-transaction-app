@@ -5,7 +5,7 @@ import Loader from "../UI/Loader/Loader";
 import MyButton from "../UI/MyButton/MyButton";
 import MyInput from "../UI/MyInput/MyInput";
 
-const TransactionForm = ({userBalance, transactions, setTransactions, setIsSuccessMsgVisible}) => {
+const TransactionForm = ({userAddress, userBalance, setUserBalance, getCurrentBalance, transactions, setTransactions, setIsSuccessMsgVisible, setErrorInfo}) => {
 
     const [receiverAddress, setReceiverAddress] = useState("");
     const [amount, setAmount] = useState("");
@@ -22,10 +22,18 @@ const TransactionForm = ({userBalance, transactions, setTransactions, setIsSucce
                 to: receiverAddress,
                 value: ethers.utils.parseEther(amount)
             });
-            setTransactions([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]);
-            setIsSuccessMsgVisible(true);
 
+            localStorage.setItem("transactions", JSON.stringify([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]))            
+            setTransactions(JSON.parse(localStorage.getItem("transactions")));
+            setIsSuccessMsgVisible(true);
+            
+            const currUserBalance = await getCurrentBalance(userAddress);
+            setUserBalance(currUserBalance);
+
+            localStorage.setItem("userBalance", userBalance);
+            
         } catch (error) {
+            setErrorInfo({isVisible: true, message: "Invalid Data"})
             console.log(error)
 
         } finally {
@@ -69,12 +77,12 @@ const TransactionForm = ({userBalance, transactions, setTransactions, setIsSucce
                     w-full 
                     text-lg 
                     p-2
-                    ${(+amount > userBalance) ? "border-red-100 text-red-300" : "border-slate-100 focus:border-slate-200"}`
+                    border-slate-100 focus:border-slate-200`
                 }
             />
 
             <MyButton
-                disabled={(+amount > userBalance) ? true : false} 
+                disabled={false} 
                 onClick={() => sendEthPayment(receiverAddress, amount)}
                 buttonName={isPaymentLoading ? <Loader /> : "Send ETH"} 
                 className={`
@@ -84,10 +92,7 @@ const TransactionForm = ({userBalance, transactions, setTransactions, setIsSucce
                     px-4 py-2
                     w-full
                     flex justify-center
-                    ${+amount > userBalance ? 
-                        "bg-gray-400 border-gray-300 cursor-no-drop opacity-6" : 
-                        "bg-indigo-600 border-indigo-400 hover:bg-indigo-500"
-                    }  
+                    bg-indigo-600 border-indigo-400 hover:bg-indigo-500 
                     transition ease-in-out
                     mt-5`
                 }
