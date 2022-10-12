@@ -13,10 +13,8 @@ function App() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    // ADD UPDATE USER BALANCE FUNCTIONALITY
-    console.log("init")
+    setUserAddress(localStorage.getItem("userAddress") ?? "");
   }, []);
-
 
   const connectWallet = async (e) => {
     e.preventDefault();
@@ -57,6 +55,7 @@ function App() {
         <MainPage 
           userAddress={userAddress} 
           userBalance={userBalance} 
+          setUserAddress={setUserAddress}
           setUserBalance={setUserBalance}
           getCurrentBalance={getCurrentBalance}
           transactions={transactions} 
