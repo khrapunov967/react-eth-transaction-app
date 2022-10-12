@@ -10,12 +10,11 @@ function App() {
 
   const [isLoginLoading, setIsLoginLoading] = useState(false);
 
-  const [transactions, setTransactions] = useState(JSON.parse(localStorage.getItem("transactions")) ?? []);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    // ADD UPDATE CURRENT BALANCE FUNCTIONALITY
-    setUserAddress(localStorage.getItem("userAddress") ?? "");
-    setUserBalance(localStorage.getItem("userBalance") ?? "");
+    // ADD UPDATE USER BALANCE FUNCTIONALITY
+    console.log("init")
   }, []);
 
 
