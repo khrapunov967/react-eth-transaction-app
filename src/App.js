@@ -10,7 +10,7 @@ function App() {
 
   const [isLoginLoading, setIsLoginLoading] = useState(false);
 
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState(JSON.parse(localStorage.getItem("transactions")) ?? []);
 
   useEffect(() => {
     setUserAddress(localStorage.getItem("userAddress") ?? "");

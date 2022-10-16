@@ -23,8 +23,7 @@ const TransactionForm = ({userAddress, userBalance, setUserBalance, getCurrentBa
                 value: ethers.utils.parseEther(amount)
             });
 
-            localStorage.setItem("transactions", JSON.stringify([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]))            
-            setTransactions(JSON.parse(localStorage.getItem("transactions")));
+            setTransactions([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]);            
             setIsSuccessMsgVisible(true);
             
             const currUserBalance = await getCurrentBalance(userAddress);
@@ -84,7 +83,7 @@ const TransactionForm = ({userAddress, userBalance, setUserBalance, getCurrentBa
             <MyButton
                 disabled={false} 
                 onClick={() => sendEthPayment(receiverAddress, amount)}
-                buttonName={isPaymentLoading ? <Loader /> : "Send ETH"} 
+                buttonName={isPaymentLoading ? <Loader mainColor={"#fff"} secondaryColor={"#f0f0f0"}/> : "Send ETH"} 
                 className={`
                     text-white 
                     rounded-lg 

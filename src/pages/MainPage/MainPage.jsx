@@ -5,28 +5,35 @@ import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import TransactionsHistorySection from "../../components/TransactionsHistorySection/TransactionsHistorySection";
 import ErrorNotification from "../../components/UI/ErrorNotification/ErrorNotification";
 import SuccessNotification from "../../components/UI/SuccessNotification/SuccessNotification";
+import Loader from "../../components/UI/Loader/Loader";
 
 const MainPage = ({userAddress, userBalance, setUserAddress, getCurrentBalance, setUserBalance, transactions, setTransactions}) => {
 
     const [isSuccessMsgVisible, setIsSuccessMsgVisible] = useState(false);
+    const [isBalanceLoading, setIsBalanceLoading] = useState(false);
     const [errorInfo, setErrorInfo] = useState({
         isVisible: false,
         message: ""
     });
 
     useEffect(() => {
-        (async (address) => {
-          const balance = await window.ethereum.request({method: "eth_getBalance", params: [address, "latest"]});
+        (async () => {
+          setIsBalanceLoading(true);
+          const balance = await window.ethereum.request({method: "eth_getBalance", params: [userAddress, "latest"]});
           const convertedBalance = ethers.utils.formatEther(balance);
       
           return convertedBalance;
-        })(userAddress).then(value => setUserBalance(value));
-    
-        localStorage.setItem("userBalance", userBalance);
+        })().then(value => {
+            setUserBalance(value);
+            setIsBalanceLoading(false);
+        });
     
         setUserAddress(localStorage.getItem("userAddress") ?? "");
-        setTransactions(JSON.parse(localStorage.getItem("transactions")) ?? []);
       }, []);
+
+    useEffect(() => {
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+    }, [transactions]);
 
     return (
         <section className="w-full flex flex-col items-center pt-5">
@@ -44,7 +51,7 @@ const MainPage = ({userAddress, userBalance, setUserAddress, getCurrentBalance, 
 
             <ProfileCard 
                 userAddress={userAddress} 
-                userBalance={userBalance} 
+                userBalance={isBalanceLoading ? <Loader mainColor={"blue"} secondaryColor={"white"}/> : userBalance} 
             />
 
             <TransactionForm 

@@ -14,6 +14,7 @@ const LoginPage = ({connectWallet, isLoginLoading}) => {
             
             <MyButton 
                 className={`
+                    w-1/3
                     bg-indigo-600 
                     text-white 
                     rounded-lg 
@@ -22,7 +23,7 @@ const LoginPage = ({connectWallet, isLoginLoading}) => {
                     hover:bg-indigo-500 
                     transition ease-in-out`
                 }
-                buttonName={isLoginLoading ? <Loader /> :"Login with Metamask"}
+                buttonName={isLoginLoading ? <Loader mainColor={"#fff"} secondaryColor={"#f0f0f0"}/> :"Login with Metamask"}
                 onClick={connectWallet}
             />
         </section>
