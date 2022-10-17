@@ -23,7 +23,7 @@ const LoginPage = ({connectWallet, isLoginLoading}) => {
                     hover:bg-indigo-500 
                     transition ease-in-out`
                 }
-                buttonName={isLoginLoading ? <Loader mainColor={"#fff"} secondaryColor={"#f0f0f0"}/> :"Login with Metamask"}
+                buttonName={isLoginLoading ? <Loader mainColor={"#fff"} secondaryColor={"#f0f0f0"}/> : "Login with Metamask"}
                 onClick={connectWallet}
             />
         </section>

@@ -7,9 +7,7 @@ function App() {
 
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState("");
-
   const [isLoginLoading, setIsLoginLoading] = useState(false);
-
   const [transactions, setTransactions] = useState(JSON.parse(localStorage.getItem("transactions")) ?? []);
 
   useEffect(() => {
@@ -18,6 +16,7 @@ function App() {
 
   const connectWallet = async (e) => {
     e.preventDefault();
+
     setIsLoginLoading(true);
     
     try {
@@ -30,21 +29,20 @@ function App() {
     } finally {
       setIsLoginLoading(false);
     }
-  }
+  };
 
   const getCurrentBalance = async (address) => {
     const balance = await window.ethereum.request({method: "eth_getBalance", params: [address, "latest"]});
     const convertedBalance = ethers.utils.formatEther(balance);
 
     return convertedBalance;
-  }
+  };
 
   const accountChangedHandler = async (accountAddress) => {
     setUserAddress(accountAddress);
     localStorage.setItem("userAddress", accountAddress);
 
     const balance = await getCurrentBalance(accountAddress);
-
     setUserBalance(balance);
     localStorage.setItem("userBalance", balance)
   };

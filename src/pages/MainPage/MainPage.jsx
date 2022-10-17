@@ -7,28 +7,30 @@ import ErrorNotification from "../../components/UI/ErrorNotification/ErrorNotifi
 import SuccessNotification from "../../components/UI/SuccessNotification/SuccessNotification";
 import Loader from "../../components/UI/Loader/Loader";
 
-const MainPage = ({userAddress, userBalance, setUserAddress, getCurrentBalance, setUserBalance, transactions, setTransactions}) => {
+const MainPage = ({userAddress, userBalance, getCurrentBalance, setUserBalance, transactions, setTransactions}) => {
 
-    const [isSuccessMsgVisible, setIsSuccessMsgVisible] = useState(false);
-    const [isBalanceLoading, setIsBalanceLoading] = useState(false);
-    const [errorInfo, setErrorInfo] = useState({
+    const [successNotificationData, setSuccessNotificationData] = useState({
         isVisible: false,
         message: ""
     });
 
+    const [errorNotificationData, setErrorNotificationData] = useState({
+        isVisible: false,
+        message: ""
+    });
+
+    const [isBalanceLoading, setIsBalanceLoading] = useState(false);
+
     useEffect(() => {
         (async () => {
-          setIsBalanceLoading(true);
-          const balance = await window.ethereum.request({method: "eth_getBalance", params: [userAddress, "latest"]});
-          const convertedBalance = ethers.utils.formatEther(balance);
-      
-          return convertedBalance;
+            setIsBalanceLoading(true);
+
+            const currentBalance = await getCurrentBalance(userAddress);
+            return currentBalance;
         })().then(value => {
             setUserBalance(value);
             setIsBalanceLoading(false);
-        });
-    
-        setUserAddress(localStorage.getItem("userAddress") ?? "");
+        })
       }, []);
 
     useEffect(() => {
@@ -38,15 +40,13 @@ const MainPage = ({userAddress, userBalance, setUserAddress, getCurrentBalance, 
     return (
         <section className="w-full flex flex-col items-center pt-5">
             <SuccessNotification 
-                msg={"Success"} 
-                isVisible={isSuccessMsgVisible} 
-                setIsVisible={setIsSuccessMsgVisible}
+                successNotificationData={successNotificationData}
+                setSuccessNotificationData={setSuccessNotificationData}
             />
 
             <ErrorNotification 
-                msg={errorInfo.message}
-                errorInfo={errorInfo}
-                setErrorInfo={setErrorInfo}
+                errorNotificationData={errorNotificationData}
+                setErrorNotificationData={setErrorNotificationData}
             />
 
             <ProfileCard 
@@ -55,14 +55,10 @@ const MainPage = ({userAddress, userBalance, setUserAddress, getCurrentBalance, 
             />
 
             <TransactionForm 
-                userAddress={userAddress}
-                userBalance={userBalance} 
-                setUserBalance={setUserBalance}
-                getCurrentBalance={getCurrentBalance}
                 transactions={transactions} 
                 setTransactions={setTransactions}
-                setIsSuccessMsgVisible={setIsSuccessMsgVisible}
-                setErrorInfo={setErrorInfo}
+                setSuccessNotificationData={setSuccessNotificationData}
+                setErrorNotificationData={setErrorNotificationData}
             />
 
             <TransactionsHistorySection 

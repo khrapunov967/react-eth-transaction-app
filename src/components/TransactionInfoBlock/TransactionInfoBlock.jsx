@@ -9,7 +9,7 @@ const TransactionInfoBlock = ({transaction}) => {
 
             <div className="flex flex-col">
                 <p>To: {transaction.receiver}</p>
-                <p className="flex gap-1 items-center">Amount: {<p className="text-green-400">{transaction.amount}</p>}</p>
+                <p className="flex gap-1 items-center">Amount: {<span className="text-green-400">{transaction.amount}</span>}</p>
             </div>
         </div>
     );

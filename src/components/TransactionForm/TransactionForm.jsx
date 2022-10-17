@@ -5,12 +5,13 @@ import Loader from "../UI/Loader/Loader";
 import MyButton from "../UI/MyButton/MyButton";
 import MyInput from "../UI/MyInput/MyInput";
 
-const TransactionForm = ({userAddress, userBalance, setUserBalance, getCurrentBalance, transactions, setTransactions, setIsSuccessMsgVisible, setErrorInfo}) => {
+const TransactionForm = ({transactions, setTransactions, setSuccessNotificationData, setErrorNotificationData}) => {
 
     const [receiverAddress, setReceiverAddress] = useState("");
     const [amount, setAmount] = useState("");
     const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
+    
     const sendEthPayment = async (receiverAddress, amount) => {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -24,15 +25,13 @@ const TransactionForm = ({userAddress, userBalance, setUserBalance, getCurrentBa
             });
 
             setTransactions([...transactions, {id: Date.now(), receiver: receiverAddress, amount: amount}]);            
-            setIsSuccessMsgVisible(true);
-            
-            const currUserBalance = await getCurrentBalance(userAddress);
-            setUserBalance(currUserBalance);
-
-            localStorage.setItem("userBalance", userBalance);
+            setSuccessNotificationData({
+                isVisible: true,
+                message: "Payment Was Successful"
+            });
             
         } catch (error) {
-            setErrorInfo({isVisible: true, message: "Invalid Data"})
+            setErrorNotificationData({isVisible: true, message: "Invalid Address And/Or Amount"})
             console.log(error)
 
         } finally {
