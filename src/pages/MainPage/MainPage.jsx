@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { ethers } from "ethers";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import TransactionsHistorySection from "../../components/TransactionsHistorySection/TransactionsHistorySection";
