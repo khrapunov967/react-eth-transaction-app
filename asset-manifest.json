@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-eth-transaction-app/static/css/main.8f052327.css",
+    "main.js": "/react-eth-transaction-app/static/js/main.c5be9dfc.js",
+    "index.html": "/react-eth-transaction-app/index.html",
+    "main.8f052327.css.map": "/react-eth-transaction-app/static/css/main.8f052327.css.map",
+    "main.c5be9dfc.js.map": "/react-eth-transaction-app/static/js/main.c5be9dfc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f052327.css",
+    "static/js/main.c5be9dfc.js"
+  ]
+}
