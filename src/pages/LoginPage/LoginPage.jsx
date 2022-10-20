@@ -13,17 +13,23 @@ const LoginPage = ({connectWallet, isLoginLoading}) => {
             />
             
             <MyButton 
+                disabled={window.ethereum ? false : true}
                 className={`
-                    w-1/3
-                    bg-indigo-600 
+                    w-1/3 
                     text-white 
                     rounded-lg 
-                    border-solid border-2 border-indigo-400 
+                    border-solid border-2 
                     px-4 py-2 
-                    hover:bg-indigo-500 
-                    transition ease-in-out`
+                    transition ease-in-out
+                    ${window.ethereum ? 
+                        "hover:bg-indigo-500 bg-indigo-600 border-indigo-400" : 
+                        "bg-stone-500 border-stone-400"}`
                 }
-                buttonName={isLoginLoading ? <Loader mainColor={"#fff"} secondaryColor={"#f0f0f0"}/> : "Login with Metamask"}
+                buttonName={!window.ethereum ? 
+                                "Please install Metamask" :
+                                isLoginLoading ? 
+                                    <Loader mainColor={"#fff"} secondaryColor={"#f0f0f0"}/> : 
+                                    "Login with Metamask"}
                 onClick={connectWallet}
             />
         </section>

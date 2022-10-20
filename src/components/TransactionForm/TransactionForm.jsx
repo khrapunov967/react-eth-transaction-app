@@ -23,9 +23,13 @@ const TransactionForm = ({transactions, setTransactions, setSuccessNotificationD
 
 
     const getErrorMessage = (errorType) => {
+
         switch(errorType) {
             case "ACTION_REJECTED":
                 return "Payment Denied";
+            
+            case "UNSUPPORTED_OPERATION":
+                return "Metamask is not connected!"
                 
             default:
                 return "Invalid Address And/Or Amount"
@@ -61,6 +65,7 @@ const TransactionForm = ({transactions, setTransactions, setSuccessNotificationD
             
         } catch (e) {
             const errorMessage = getErrorMessage(e.code);
+            console.log(e.code);
 
             setErrorNotificationData({
                 isVisible: true, 

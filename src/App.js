@@ -11,8 +11,19 @@ function App() {
   const [transactions, setTransactions] = useState(JSON.parse(localStorage.getItem("transactions")) ?? []);
 
   useEffect(() => {
-    setUserAddress(localStorage.getItem("userAddress") ?? "");
+    (async () => {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.listAccounts();
+
+        return accounts[0];
+
+      } catch (e) {
+        return "";
+      }
+    })().then(value => setUserAddress(value));
   }, []);
+  
 
   const connectWallet = async (e) => {
     e.preventDefault();
@@ -40,16 +51,14 @@ function App() {
 
   const accountChangedHandler = async (accountAddress) => {
     setUserAddress(accountAddress);
-    localStorage.setItem("userAddress", accountAddress);
 
     const balance = await getCurrentBalance(accountAddress);
     setUserBalance(balance);
-    localStorage.setItem("userBalance", balance)
   };
 
   return (
     <div className="wrapper">
-      {(userAddress) ? 
+      {(userAddress && window.ethereum) ? 
         <MainPage 
           userAddress={userAddress} 
           userBalance={userBalance} 
