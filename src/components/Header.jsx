@@ -4,7 +4,7 @@ import LogoImage from "../assets/images/logo.svg";
 
 const Header = () => {
     return (
-        <header className="w-full flex justify-between items-center border-solid border-2 border-white py-2 px-5">
+        <header className="w-full flex justify-between items-center py-2 px-5 shadow-md">
 
             <div className="flex gap-3 items-center">
                 <img src={LogoImage} alt="Logo Image" width={"47px"} height={"47px"}/>
