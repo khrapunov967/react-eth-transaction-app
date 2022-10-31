@@ -3,7 +3,7 @@ import EthereumImage from "../assets/images/ethereum.svg"
 
 const EthereumCard = () => {
     return (
-        <div className="flex flex-col justify-between w-[300px] h-[160px] rounded-lg shadow-lg p-3 bg-gradient-to-tl from-green-400 via-red-200 to-blue-400">
+        <div className="cursor-pointer flex flex-col justify-between w-[300px] h-[160px] rounded-lg shadow-lg p-3 bg-gradient-to-tl from-green-400 via-red-200 to-blue-400">
             <div className="w-full flex">
                 <img 
                     src={EthereumImage} 
