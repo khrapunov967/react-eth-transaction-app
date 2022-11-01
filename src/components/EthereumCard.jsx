@@ -1,7 +1,12 @@
 import React from "react";
+import { useContext } from "react";
 import EthereumImage from "../assets/images/ethereum.svg"
+import { Context } from "../context";
 
 const EthereumCard = () => {
+
+    const {state, dispatch} = useContext(Context);
+    
     return (
         <div className="cursor-pointer flex flex-col justify-between w-[300px] h-[160px] rounded-lg shadow-lg p-3 bg-gradient-to-tl from-green-700 via-purple-500 to-[#1e1e4d] transiton-all duration-150 ease-linear hover:translate-y-[-2px]">
             <div className="w-full flex">
@@ -13,7 +18,9 @@ const EthereumCard = () => {
             </div>
 
             <div className="w-full flex flex-col gap-2">
-                <p className="text-white font-bold">...</p>
+                <p className="text-white font-bold">
+                    {state.userAddress ? state.truncatedUserAddress : "..."}
+                </p>
                 <p className="text-white font-semibold">Ethereum</p>
             </div>
         </div>
