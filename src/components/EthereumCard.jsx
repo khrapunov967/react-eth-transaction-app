@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import EthereumImage from "../assets/images/ethereum.svg"
 import { Context } from "../context";
+import EthereumImage from "../assets/images/ethereum.svg"
 
 const EthereumCard = () => {
 
     const {state, getTruncatedEthAddress} = useContext(Context);
     
     return (
-        <div className="cursor-pointer flex flex-col justify-between w-full max-w-[300px] h-[160px] rounded-lg shadow-lg p-3 bg-gradient-to-tl from-green-700 via-purple-500 to-[#1e1e4d] transiton-all duration-150 ease-linear hover:translate-y-[-2px]">
+        <div className="flex flex-col justify-between w-full max-w-[300px] h-[160px] rounded-lg shadow-lg p-3 bg-gradient-to-tl from-green-700 via-purple-500 to-[#1e1e4d]">
             <div className="w-full flex">
                 <img 
                     src={EthereumImage} 
@@ -20,6 +20,7 @@ const EthereumCard = () => {
                 <p className="text-white font-semibold">
                     {state.userAddress ? getTruncatedEthAddress(state.userAddress) : "..."}
                 </p>
+                
                 <p className="text-white font-semibold">Ethereum</p>
             </div>
         </div>

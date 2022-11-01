@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../context";
 import BlueRoundedButton from "./UI/BlueRoundedButton";
-import LogoImage from "../assets/images/logo.svg";
 import Loader from "./UI/Loader";
 import BurgerMenuButton from "./UI/BurgerMenuButton";
 import CloseButton from "./UI/CloseButton";
+import LogoImage from "../assets/images/logo.svg";
 
 const Header = () => {
 
@@ -17,7 +17,8 @@ const Header = () => {
 
             <div className="flex gap-3 items-center cursor-pointer">
                 <img src={LogoImage} alt="Logo Image" width={"47px"} height={"47px"}/>
-                <p className="text-white font-semibold text-2xl hidden sm:block">Krypter.io</p>
+                
+                <p className="text-white font-semibold text-2xl max-md-screen:hidden">Krypter.io</p>
             </div>
 
             <nav className="">

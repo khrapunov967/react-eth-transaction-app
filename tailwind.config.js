@@ -9,7 +9,8 @@ module.exports = {
         "slideleft": "slideleft 0.4s linear forwards"
       },
       screens: {
-        "max-md-screen": {"max": "768px"}
+        "max-md-screen": {"max": "768px"},
+        "max-sm-screen": {"max": "312px"}
       },
       keyframes: {
         slideleft: {
