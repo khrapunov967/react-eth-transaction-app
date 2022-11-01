@@ -9,7 +9,7 @@ const TransactionsHistorySection = () => {
 
     return (    
         <section className="w-full flex flex-col items-center mb-[50px] px-5">
-            <h2 className="text-white text-[44px] mb-10">Transactions History</h2>
+            <h2 className="text-white text-[44px] mb-10 text-center">Latest Transactions</h2>
 
             <section className="w-full flex flex-wrap gap-[32px] justify-center">
                 {

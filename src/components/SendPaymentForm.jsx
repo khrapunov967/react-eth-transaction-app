@@ -65,13 +65,15 @@ const SendPaymentForm = () => {
         } finally {
             setPayment({
                 ...payment,
+                receiver: "",
+                amount: "",
                 isPaymentProcessing: false
             });
         }
     };
 
     return (
-        <form action="#" className="bg-[#131336] flex flex-col gap-2 p-4 rounded-lg shadow-lg w-[400px]">
+        <form action="#" className="bg-[#131336] flex flex-col gap-2 p-4 rounded-lg shadow-lg w-full max-w-[400px]">
             <input 
                 value={payment.receiver}
                 onChange={(e) => setPayment({...payment, receiver: e.target.value})}
