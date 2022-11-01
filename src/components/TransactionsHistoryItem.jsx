@@ -1,19 +1,19 @@
 import React from "react";
 import DateContainer from "./DateContainer";
 
-const TransactionsHistoryItem = () => {
+const TransactionsHistoryItem = ({transaction}) => {
     return (
         <div className="flex flex-col bg-gray-900 shadow-lg rounded-lg px-4 pt-7">
             <div className="mb-3">
-                <p className="text-white text-[17px]">From: 0x2A1...b81a</p>
-                <p className="text-white text-[17px]">To: 0x2A1...b81a</p>
-                <p className="text-white text-[17px]">Amount: 1.5 ETH</p>
+                <p className="text-white text-[17px]">From: {transaction.from}</p>
+                <p className="text-white text-[17px]">To: {transaction.to}</p>
+                <p className="text-white text-[17px]">Amount: {transaction.amount} ETH</p>
             </div>
 
-            <img src="https://media.giphy.com/media/hDHvAxrlm6XUWlUann/giphy.gif" className="w-[300px] h-[300px] rounded-lg"/>
+            <img src={transaction.gif} className="w-[300px] h-[300px] rounded-lg"/>
 
             <div className="w-full flex justify-center relative z-10 top-[-25px]">
-                <DateContainer />
+                <DateContainer date={transaction.date}/>
             </div>
         </div>
     );
