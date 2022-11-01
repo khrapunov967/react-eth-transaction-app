@@ -6,7 +6,7 @@ import TransactionsHistorySection from "./components/TransactionsHistorySection"
 
 function App() {
   return (
-    <div className="max-w-[1440px] my-0 mx-auto">
+    <div className="max-w-[1300px] my-0 mx-auto">
       <Header />
       <MainSection />
       <TransactionsHistorySection />

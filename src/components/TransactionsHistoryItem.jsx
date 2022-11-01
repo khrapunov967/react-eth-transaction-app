@@ -10,7 +10,7 @@ const TransactionsHistoryItem = () => {
                 <p className="text-white text-[17px]">Amount: 1.5 ETH</p>
             </div>
 
-            <img src="https://media.giphy.com/media/QnU6mOrBbElaIQz4Fe/giphy.gif" className="w-[300px] h-[300px] rounded-lg"/>
+            <img src="https://media.giphy.com/media/hDHvAxrlm6XUWlUann/giphy.gif" className="w-[300px] h-[300px] rounded-lg"/>
 
             <div className="w-full flex justify-center relative z-10 top-[-25px]">
                 <DateContainer />
