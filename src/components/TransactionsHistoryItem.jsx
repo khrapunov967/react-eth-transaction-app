@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
+import { Context } from "../context";
 import DateContainer from "./DateContainer";
 
 const TransactionsHistoryItem = ({transaction}) => {
+
+    const {getTruncatedEthAddress} = useContext(Context);
+
     return (
         <div className="flex flex-col bg-gray-900 shadow-lg rounded-lg px-4 pt-7">
             <div className="mb-3">
-                <p className="text-white text-[17px]">From: {transaction.from}</p>
-                <p className="text-white text-[17px]">To: {transaction.to}</p>
+                <p className="text-white text-[17px]">From: {getTruncatedEthAddress(transaction.from)}</p>
+                <p className="text-white text-[17px]">To: {getTruncatedEthAddress(transaction.to)}</p>
                 <p className="text-white text-[17px]">Amount: {transaction.amount} ETH</p>
             </div>
 

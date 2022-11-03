@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { Context } from "./context";
+import FirestoreService from "./API/FirestoreService";
 import Header from "./components/Header";
 import MainSection from "./components/MainSection";
 import TransactionsHistorySection from "./components/TransactionsHistorySection";
@@ -11,10 +12,18 @@ function App() {
   const [state, setState] = useState({
     userAddress: "",
     userBalance: null,
-    transactions: JSON.parse(localStorage.getItem("transactions")) || [],
+    transactions: [],
     isWalletConnecting: false
   });
+
   
+  const getTransactionsFromDB = () => {
+    FirestoreService.getTransactions()
+      .then(value => setState({
+        ...state,
+        transactions: value
+      }));
+  };
 
   const refreshPage = () => {
     window.location.reload(false);
@@ -71,13 +80,11 @@ function App() {
       ...state,
       userAddress: address
     }));
+
   }, []);
-
-
-  useEffect(() => {
-    localStorage.setItem("transactions", JSON.stringify(state.transactions))
-  }, [state.transactions])
-
+  
+  getTransactionsFromDB();
+  
   return (
     <Context.Provider value={{state, setState, connectWallet, getTruncatedEthAddress}}>
       <div className="max-w-[1300px] my-0 mx-auto">

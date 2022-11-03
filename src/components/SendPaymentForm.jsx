@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { Context } from "../context";
 import { gifUrls } from "../utils/constants";
 import Loader from "./UI/Loader";
+import FirestoreService from "../API/FirestoreService";
 
 const SendPaymentForm = () => {
 
@@ -12,7 +13,7 @@ const SendPaymentForm = () => {
         isPaymentProcessing: false
     });
 
-    const {state, setState, getTruncatedEthAddress} = useContext(Context);
+    const {state, setState} = useContext(Context);
 
     const getCurrentDate = () => {
         const today = new Date();
@@ -24,9 +25,11 @@ const SendPaymentForm = () => {
         return `${day}.${month}.${year}`;
     };
 
+
     const getRandomGifUrl = () => {
         return gifUrls[Math.floor(Math.random()*gifUrls.length)];
     }
+
 
     const sendEthPayment = async (e) => {
         e.preventDefault();
@@ -47,12 +50,14 @@ const SendPaymentForm = () => {
 
             const newTransaction = {
                 id: Date.now(),
-                from: getTruncatedEthAddress(state.userAddress),
-                to: getTruncatedEthAddress(payment.receiver),
+                from: state.userAddress,
+                to: payment.receiver,
                 amount: payment.amount,
                 date: getCurrentDate(),
                 gif: getRandomGifUrl()
             };
+
+            FirestoreService.addTransaction(newTransaction);
 
             setState({
                 ...state,
