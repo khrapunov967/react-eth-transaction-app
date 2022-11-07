@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ethers } from "ethers";
 import { Context } from "../context";
-import { gifUrls } from "../utils/constants";
+import { GIF_URLS } from "../utils/constants";
 import Loader from "./UI/Loader";
 import FirestoreService from "../API/FirestoreService";
 
@@ -27,7 +27,7 @@ const SendPaymentForm = () => {
 
 
     const getRandomGifUrl = () => {
-        return gifUrls[Math.floor(Math.random()*gifUrls.length)];
+        return GIF_URLS[Math.floor(Math.random()*GIF_URLS.length)];
     }
 
 

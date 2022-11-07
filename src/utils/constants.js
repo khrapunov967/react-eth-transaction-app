@@ -1,4 +1,4 @@
-export const gifUrls = [
+export const GIF_URLS = [
     "https://media.giphy.com/media/nIoUgc3KW2BF5rxVj2/giphy.gif",
     "https://media.giphy.com/media/iYTXFJofI7I987H92k/giphy.gif",
     "https://media.giphy.com/media/hDHvAxrlm6XUWlUann/giphy.gif",
@@ -13,4 +13,4 @@ export const gifUrls = [
     "https://media.giphy.com/media/7zAzsNjzX4qKYJswGg/giphy.gif",
     "https://media.giphy.com/media/Vlfihn5fa3Cd7wPlLW/giphy.gif",
     "https://media.giphy.com/media/yyW6OGDBz8HVZywTes/giphy.gif"
-]
+];

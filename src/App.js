@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { Context } from "./context";
+import { getTruncatedEthAddress, refreshPage } from "./utils/funcs";
 import FirestoreService from "./API/FirestoreService";
 import Header from "./components/Header";
 import MainSection from "./components/MainSection";
@@ -24,15 +25,6 @@ function App() {
         transactions: value
       }));
   };
-
-  const refreshPage = () => {
-    window.location.reload(false);
-  }
-
-
-  const getTruncatedEthAddress = (ethAddress) => {
-    return `${ethAddress.slice(0, 3)}...${ethAddress.slice(ethAddress.length - 3)}`
-  }
 
 
   const connectWallet = async (e) => {
@@ -71,7 +63,7 @@ function App() {
         const accounts = await provider.listAccounts();
 
         return accounts[0];
-
+        
       } catch (e) {
         return "";
       }
