@@ -14,7 +14,11 @@ const TransactionsHistoryItem = ({transaction}) => {
                 <p className="text-white text-[17px]">Amount: {transaction.amount} ETH</p>
             </div>
 
-            <img src={transaction.gif} className="w-[300px] h-[300px] rounded-lg"/>
+            <img 
+                className="w-[300px] h-[300px] rounded-lg"
+                src={transaction.gif} 
+                alt="Very cool gif"
+            />
 
             <div className="w-full flex justify-center relative z-10 top-[-25px]">
                 <DateContainer date={transaction.date}/>

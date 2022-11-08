@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ethers } from "ethers";
 import { Context } from "../context";
-import { GIF_URLS } from "../utils/constants";
+import { getCurrentDate, getRandomGifUrl,  } from "../utils/funcs"
 import Loader from "./UI/Loader";
 import FirestoreService from "../API/FirestoreService";
 
@@ -14,21 +14,6 @@ const SendPaymentForm = () => {
     });
 
     const {state, setState} = useContext(Context);
-
-    const getCurrentDate = () => {
-        const today = new Date();
-
-        const day = String(today.getDate()).padStart(2, '0');
-        const month = String(today.getMonth() + 1).padStart(2, '0'); 
-        const year = today.getFullYear();
-
-        return `${day}.${month}.${year}`;
-    };
-
-
-    const getRandomGifUrl = () => {
-        return GIF_URLS[Math.floor(Math.random()*GIF_URLS.length)];
-    }
 
 
     const sendEthPayment = async (e) => {
