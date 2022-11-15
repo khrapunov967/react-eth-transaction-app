@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-eth-transaction-app/static/css/main.6f09a61d.css",
-    "main.js": "/react-eth-transaction-app/static/js/main.8053dc4e.js",
+    "main.css": "/react-eth-transaction-app/static/css/main.b8238f81.css",
+    "main.js": "/react-eth-transaction-app/static/js/main.ad242434.js",
     "static/media/logo.svg": "/react-eth-transaction-app/static/media/logo.8dd850438f8b6810b5dcd2d710eb9326.svg",
     "index.html": "/react-eth-transaction-app/index.html",
     "static/media/ethereum.svg": "/react-eth-transaction-app/static/media/ethereum.9aa99f48b6c89dfc7a45f7d09e8348de.svg",
-    "main.6f09a61d.css.map": "/react-eth-transaction-app/static/css/main.6f09a61d.css.map",
-    "main.8053dc4e.js.map": "/react-eth-transaction-app/static/js/main.8053dc4e.js.map"
+    "main.b8238f81.css.map": "/react-eth-transaction-app/static/css/main.b8238f81.css.map",
+    "main.ad242434.js.map": "/react-eth-transaction-app/static/js/main.ad242434.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f09a61d.css",
-    "static/js/main.8053dc4e.js"
+    "static/css/main.b8238f81.css",
+    "static/js/main.ad242434.js"
   ]
 }
