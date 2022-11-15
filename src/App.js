@@ -79,8 +79,10 @@ function App() {
   
   return (
     <Context.Provider value={{state, setState, connectWallet, getTruncatedEthAddress}}>
-      <div className="max-w-[1300px] my-0 mx-auto">
-        <Header />
+      <div className="w-full min-h-screen bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 my-0 mx-auto">
+        <div className="w-full sticky top-0 shadow-lg z-20">
+          <Header />
+        </div>
         <MainSection />
         <TransactionsHistorySection />
       </div>
