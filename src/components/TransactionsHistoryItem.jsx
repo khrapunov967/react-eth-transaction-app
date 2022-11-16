@@ -15,7 +15,7 @@ const TransactionsHistoryItem = ({transaction}) => {
             </div>
 
             <img 
-                className="w-[300px] h-[300px] rounded-lg"
+                className="w-[300px] h-[300px] rounded-lg max-sm-screen:h-[200px]"
                 src={transaction.gif} 
                 alt="Very cool gif"
             />

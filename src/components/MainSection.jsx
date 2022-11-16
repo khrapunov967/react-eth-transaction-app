@@ -17,7 +17,7 @@ const MainSection = () => {
                 </h2>
                 
                 <p className="text-white opacity-50 mb-3 max-md-screen:hidden">
-                    Buy and sell cryptocurrencies, trusted by 10M wallets with over $30 billion in transactions.
+                    Send cryptocurrencies, trusted by 10M wallets with over $30 billion in transactions.
                 </p>
 
                 <BlueRoundedButton 

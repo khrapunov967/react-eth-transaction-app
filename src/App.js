@@ -11,19 +11,9 @@ function App() {
 
   const [state, setState] = useState({
     userAddress: "",
-    userBalance: null,
     transactions: [],
     isWalletConnecting: false
   });
-
-  
-  const getTransactionsFromDB = () => {
-    FirestoreService.getTransactions()
-      .then(value => setState({
-        ...state,
-        transactions: value
-      }));
-  };
 
 
   const connectWallet = async (e) => {
@@ -57,24 +47,22 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const accounts = await provider.listAccounts();
+      const transactions = await FirestoreService.getTransactions();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const accounts = await provider.listAccounts();
 
-        return accounts[0];
-        
-      } catch (e) {
-        return "";
-      }
+      return {
+        userAddress: accounts[0] ?? "",
+        transactions: transactions ?? []
+      };
 
-    })().then(address => setState({
+    })().then(({userAddress, transactions}) => setState({
       ...state,
-      userAddress: address
+      userAddress,
+      transactions
     }));
-
+    
   }, []);
-  
-  getTransactionsFromDB();
   
   return (
     <Context.Provider value={{state, setState, connectWallet, getTruncatedEthAddress}}>

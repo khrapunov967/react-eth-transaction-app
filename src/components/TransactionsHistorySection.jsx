@@ -7,7 +7,7 @@ const TransactionsHistorySection = () => {
     const {state} = useContext(Context);
 
     return (    
-        <section className="w-full max-w-[1600px] my-0 mx-auto flex flex-col items-center px-5">
+        <section className="animate-slideup w-full max-w-[1600px] my-0 mx-auto flex flex-col items-center px-5">
             <h2 className="text-white text-[44px] mb-10 text-center">
                 Latest Transactions
             </h2>
