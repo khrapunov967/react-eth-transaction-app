@@ -48,13 +48,19 @@ function App() {
   useEffect(() => {
     (async () => {
       const transactions = await FirestoreService.getTransactions();
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const accounts = await provider.listAccounts();
+      let userAddress = "";
+
+      if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const accounts = await provider.listAccounts();
+        
+        userAddress = accounts[0];
+      }
 
       return {
-        userAddress: accounts[0] ?? "",
+        userAddress,
         transactions: transactions ?? []
-      };
+      }
 
     })().then(({userAddress, transactions}) => setState({
       ...state,
