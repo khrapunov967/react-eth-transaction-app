@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { ethers } from "ethers";
 import { Context } from "./context";
 import { getTruncatedEthAddress, refreshPage } from "./utils/funcs";
 import FirestoreService from "./API/FirestoreService";
-import Header from "./components/Header";
-import MainSection from "./components/MainSection";
-import TransactionsHistorySection from "./components/TransactionsHistorySection";
+import MainPage from "./pages/MainPage";
 
 
 function App() {
@@ -79,13 +78,9 @@ function App() {
   
   return (
     <Context.Provider value={{state, setState, connectWallet, getTruncatedEthAddress}}>
-      <div className="w-full min-h-screen bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 my-0 mx-auto">
-        <div className="w-full sticky top-0 shadow-lg z-20">
-          <Header />
-        </div>
-        <MainSection />
-        <TransactionsHistorySection />
-      </div>
+      <Routes>
+        <Route path="/" element={<MainPage />}/>
+      </Routes>
     </Context.Provider>
   );
 }

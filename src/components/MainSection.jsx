@@ -10,8 +10,8 @@ const MainSection = () => {
     const {state, connectWallet} = useContext(Context);
 
     return (
-        <main className="w-full flex flex-row gap-5 px-[25px] mb-[80px] justify-between max-md-screen:flex-col max-md-screen:items-center ">
-            <section className="max-w-[450px] max-md-screen:mb-[20px] flex flex-col max-md-screen:items-center">
+        <main className="w-full max-w-[1600px] my-0 mx-auto flex flex-row gap-5 px-[25px] mb-[80px] justify-between max-md-screen:flex-col max-md-screen:items-center ">
+            <section className="max-w-[450px] animate-slideright max-md-screen:mb-[20px] flex flex-col max-md-screen:items-center">
                 <h2 className="text-white text-[54px] font-bold leading-tight mb-5 max-md-screen:text-center max-sm-screen:text-[40px]">
                     Send ETH cheap and rapidly.
                 </h2>
@@ -28,7 +28,7 @@ const MainSection = () => {
                 />
             </section>
 
-            <section className="w-full max-w-[400px] flex flex-col items-center gap-4">
+            <section className="w-full max-w-[400px] flex flex-col items-center gap-4 animate-slideleft">
                 <EthereumCard />
 
                 <SendPaymentForm />

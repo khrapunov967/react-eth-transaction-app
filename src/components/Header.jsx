@@ -9,12 +9,10 @@ import LogoImage from "../assets/images/logo.svg";
 const Header = () => {
 
     const {state, connectWallet, getTruncatedEthAddress} = useContext(Context);
-
     const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
 
     return (
-        <header className="w-full flex justify-between items-center py-2 px-5 mb-[80px]">
-
+        <header className="w-full max-w-[1600px] my-0 mx-auto flex justify-between items-center py-2 px-5 mb-[80px]">
             <div className="flex gap-3 items-center cursor-pointer">
                 <img src={LogoImage} 
                     alt="Logo" 
